@@ -1,4 +1,4 @@
-import resume from '../../../public/JustinVittitoeResume.pdf'
+const resume = '/JustinVittitoeResume.pdf'
 
 export default function Resume() {
 
@@ -43,32 +43,39 @@ export default function Resume() {
        
         
     ]
-    const mapSkills = skillsArray.map(skill =>
-        
-            <div className='content item flex inline-block place-content-center m-3'>
-                {skill.icon}
-            <p className='mt-2 text-center'>{skill.language}</p>
-            </div>
-
-        
-    )
+    const mapSkills = skillsArray.map((skill, index) => (
+        <div key={index} className='content item flex flex-col items-center justify-center p-4'>
+            {skill.icon}
+            <p className='mt-2 text-center text-sm'>{skill.language}</p>
+        </div>
+    ))
 
     return (
         <div>
-            <div className='content flex grid grid-cols-4 '>
-                <h2 className='col-span-4 m-5'>Skills</h2>
-                {mapSkills}
+            <div className='content'>
+                <h2 className='text-center mb-6'>Skills</h2>
+                <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
+                    {mapSkills}
+                </div>
             </div>
 
             <div className='content'>
-                <h1 className='text-center m-5'>Resume</h1>
+                <h1 className='text-center mb-6'>Resume</h1>
+                <div className='mb-4 text-center'>
+                    <a 
+                        href={resume} 
+                        download="JustinVittitoe_Resume.pdf"
+                        className='bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors'
+                    >
+                        Download Resume
+                    </a>
+                </div>
                 <iframe
                     src={resume}
                     title="Resume"
                     width="100%"
-                    height="800px"
-                    className='flex item w-160 m-5'
-                    onClick={()=>handleResume}
+                    height="600px"
+                    className='border rounded-lg'
                 />
             </div>
         </div>

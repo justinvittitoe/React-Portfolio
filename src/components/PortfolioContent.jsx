@@ -9,7 +9,7 @@ import Footer from './Footer';
 export default function PortfolioContent() {
     const [currentPage, setCurrentPage] = useState('AboutMe');
 
-    const rednerPage = () => {
+    const renderPage = () => {
         if(currentPage === 'AboutMe') {
             return <AboutMe handlePageChange={handlePageChange}/>;
         }
@@ -32,7 +32,7 @@ export default function PortfolioContent() {
         <div>
             <NavTabs currentPage={currentPage} handlePageChange={handlePageChange} />
             {/*Insert styling class for each page*/}
-            <main>{rednerPage()}</main>
+            <main>{renderPage()}</main>
             
            <Footer />
         </div>

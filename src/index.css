@@ -11,9 +11,30 @@
 
 main {
   padding-bottom: 5em;
-  padding-left: 15em;
-  padding-right: 15em;
+  padding-left: 2em;
+  padding-right: 2em;
   
+}
+
+@media (min-width: 768px) {
+  main {
+    padding-left: 4em;
+    padding-right: 4em;
+  }
+}
+
+@media (min-width: 1024px) {
+  main {
+    padding-left: 8em;
+    padding-right: 8em;
+  }
+}
+
+@media (min-width: 1280px) {
+  main {
+    padding-left: 15em;
+    padding-right: 15em;
+  }
 }
 footer {
   text-align: center;
@@ -42,14 +63,28 @@ body {
 
 h1 {
   font-weight: 500;
-  font-size: 3.2em;
+  font-size: 2.5em;
   line-height: 1.1;
   color: #f9f9f9;
   padding: 0px 0px 15px;
 }
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 3.2em;
+  }
+}
+
 h2 {
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: 750;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  h2 {
+    font-size: 2em;
+  }
 }
 
 button {
@@ -74,7 +109,34 @@ nav {
   display:flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 10px 35px
+  padding: 10px 10px 35px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  
+  nav h2 {
+    margin-bottom: 0;
+  }
+  
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #020202;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 50;
+  }
 }
 .active {
   color: #f9f9f9;
@@ -84,11 +146,18 @@ nav {
 
 .content {
   justify-content: center;
-  padding: 2em;
-  margin-bottom: 5em;
+  padding: 1.5em;
+  margin-bottom: 3em;
   background: #1a1a1a;
   border-radius: 25px;
   box-shadow: 0em 0em 2em #f9f9f9;
+}
+
+@media (min-width: 768px) {
+  .content {
+    padding: 2em;
+    margin-bottom: 5em;
+  }
 }
 .content > a {
   font-weight: bolder;
@@ -103,12 +172,25 @@ nav {
 .nav {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .nav-item {
   display:flex;
   justify-content: space-between;
   margin: 8px;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .nav-item {
+    margin: 4px;
+  }
 }
 
 
