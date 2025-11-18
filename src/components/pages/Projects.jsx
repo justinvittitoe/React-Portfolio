@@ -50,6 +50,14 @@ function Projects() {
             githubLink: "https://github.com/ZachD-ae/Doodle_Noodle",
             technologies: ["Node.js", "Express", "MongoDB", "Apollo Server", "GraphQL"]
         },
+        {
+            title: "Mayberry Communities Pricing App",
+            description: "A custom home builder application where customer can price out a home with available options and admins can manage available options.",
+            imageId: "",
+            projectLink: "",
+            githubLink: "",
+            technologies: ["Node.js", "Express", "MongoDB", "Apollo Server", "GraphQL"]
+        }
     ]
     const mapProjects = projectsArray.map((project, index) => (
         <div key={index} className="content project">
