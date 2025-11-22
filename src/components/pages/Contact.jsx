@@ -6,17 +6,10 @@ function Contact() {
    const [name, setName] = useState('');
    const [email,setEmail] = useState('');
    const [message, setMessage] = useState('');
-   const [errorMessage, setErrorMessage] = useState({
-    name: '',
-    email: '',
-    message: ''
-   });
-   const [touched, setTouched] = useState({
-    name: false,
-    email: false,
-    message: false,
-   })
-   const [result, setResult] = useState("");
+   
+   
+   const [result, setResult] = useState('');
+   
 
     useEffect(()=> {
         const newErrors = {
@@ -67,13 +60,9 @@ function Contact() {
             setMessage(inputValue)
         }
     };
-    
-    const handleFormSubmit = async (e) => {
-        e.preventDefault();
-    
-   
-        //check if email is valid and their is a name in the name feild
-        if(!validateEmail(email) || !name) {
+    const onSubmit = async (event) => {
+        event.preventDefault();
+        if (!validateEmail(email) || !name) {
             alert('Error missing a valid email address or name');
             return;
         }
@@ -81,32 +70,35 @@ function Contact() {
             alert('Error missing a message');
             return;
         }
-        const formData = new FormData(e.target);
+        setResult("Sending....");
+        const formData = new FormData(event.target);
         formData.append("access_key", "07b08d43-2862-4e7a-b3ed-b03dd107a9f8");
 
         const response = await fetch("https://api.web3forms.com/submit", {
             method: "POST",
-            body: formData,
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json"
-            }
-        }).then((res) => res.json);
+            body: formData
+        });
 
-        const data = await response.json()
-        if(res.success) {
+        
+        const data = await response.json();
+        
+        if (data.success) {
             Swal.fire({
                 title: "Good job!",
                 text: "Message sent successfully!",
                 icon: "success"
             });
+            setResult("Success")
+        } else {
+            setResult("Error");
         }
 
-        setResult(data.success ? "Success!" : "Error")
         setName('');
         setEmail('');
         setMessage('');
     };
+
+    
 
     return (
         <div>
@@ -138,7 +130,7 @@ function Contact() {
             </div>
                         
             <div className='content'>
-                <form className='max-w-lg mx-auto space-y-4' onSubmit={handleFormSubmit}>
+                <form className='max-w-lg mx-auto space-y-4' onSubmit={onSubmit}>
                     <h2 className='text-center'>Contact Form</h2>
                     <div className="input-box">
                         <label>Full Name</label>
@@ -151,8 +143,9 @@ function Contact() {
                             onFocus={handleFocus}
                             placeholder='Name'
                             type='text'
+                            required
                         />
-                        {errorMessage.name && <p className="text-red-400 text-sm mt-1">{errorMessage.name}</p>}
+                        
                     </div>
                     <div>
                         <label>Email</label>
@@ -165,8 +158,9 @@ function Contact() {
                             onFocus={handleFocus}
                             placeholder='Email'
                             type='email'
+                            required
                         />
-                        {errorMessage.email && <p className="text-red-400 text-sm mt-1">{errorMessage.email}</p>}
+                        
                     </div>
                     <div>
                         <label className='pb2'>Message</label>
@@ -178,12 +172,14 @@ function Contact() {
                             onBlur={handleBlur}
                             onFocus={handleFocus}
                             placeholder='Message'
+                            required
                         />
-                        {errorMessage.message && <p className="text-red-400 text-sm mt-1">{errorMessage.message}</p>}
+                        
                     </div>
                     <button type="submit" className='w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg transition-colors'>
                         Submit
                     </button>
+                    <span>{result}</span>
                 </form>
             </div>
         </div>        
