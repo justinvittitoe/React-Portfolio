@@ -1,5 +1,6 @@
 import {useState, useEffect } from 'react';
 import { validateEmail } from '../utils/validateEmail';
+import Swal from 'sweetalert2';
 
 function Contact() {
    const [name, setName] = useState('');
@@ -15,6 +16,7 @@ function Contact() {
     email: false,
     message: false,
    })
+   const [result, setResult] = useState("");
 
     useEffect(()=> {
         const newErrors = {
@@ -66,7 +68,7 @@ function Contact() {
         }
     };
     
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
     
    
@@ -79,11 +81,31 @@ function Contact() {
             alert('Error missing a message');
             return;
         }
-            alert(`Thank you ${name} for reaching out!`)
+        const formData = new FormData(e.target);
+        formData.append("access_key", "07b08d43-2862-4e7a-b3ed-b03dd107a9f8");
 
-            setName('');
-            setEmail('');
-            setMessage('')
+        const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: formData,
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            }
+        }).then((res) => res.json);
+
+        const data = await response.json()
+        if(res.success) {
+            Swal.fire({
+                title: "Good job!",
+                text: "Message sent successfully!",
+                icon: "success"
+            });
+        }
+
+        setResult(data.success ? "Success!" : "Error")
+        setName('');
+        setEmail('');
+        setMessage('');
     };
 
     return (
@@ -116,9 +138,10 @@ function Contact() {
             </div>
                         
             <div className='content'>
-                <h2 className='text-center mb-6'>Send me a message</h2>
                 <form className='max-w-lg mx-auto space-y-4' onSubmit={handleFormSubmit}>
-                    <div>
+                    <h2 className='text-center'>Contact Form</h2>
+                    <div className="input-box">
+                        <label>Full Name</label>
                         <input
                             className='bg-white rounded-lg text-black w-full h-12 px-4 py-2'
                             value={name}
@@ -132,6 +155,7 @@ function Contact() {
                         {errorMessage.name && <p className="text-red-400 text-sm mt-1">{errorMessage.name}</p>}
                     </div>
                     <div>
+                        <label>Email</label>
                         <input
                             className='bg-white rounded-lg text-black w-full h-12 px-4 py-2'
                             value={email}
@@ -145,6 +169,7 @@ function Contact() {
                         {errorMessage.email && <p className="text-red-400 text-sm mt-1">{errorMessage.email}</p>}
                     </div>
                     <div>
+                        <label className='pb2'>Message</label>
                         <textarea
                             className='bg-white rounded-lg text-black w-full h-32 px-4 py-2 resize-none'
                             value={message}
@@ -156,7 +181,7 @@ function Contact() {
                         />
                         {errorMessage.message && <p className="text-red-400 text-sm mt-1">{errorMessage.message}</p>}
                     </div>
-                    <button className='w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg transition-colors'>
+                    <button type="submit" className='w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg transition-colors'>
                         Submit
                     </button>
                 </form>
