@@ -1,4 +1,5 @@
 @import "tailwindcss";
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -9,33 +10,6 @@
   background-color: #020202;
 }
 
-main {
-  padding-bottom: 5em;
-  padding-left: 2em;
-  padding-right: 2em;
-  
-}
-
-@media (min-width: 768px) {
-  main {
-    padding-left: 4em;
-    padding-right: 4em;
-  }
-}
-
-@media (min-width: 1024px) {
-  main {
-    padding-left: 8em;
-    padding-right: 8em;
-  }
-}
-
-@media (min-width: 1280px) {
-  main {
-    padding-left: 15em;
-    padding-right: 15em;
-  }
-}
 footer {
   text-align: center;
   padding: 10px;
@@ -59,6 +33,11 @@ body {
   display: flex;
   min-width: 320px;
   min-height: 100vh;
+  width: 100%;
+}
+
+#root {
+  width: 100%;
 }
 
 h1 {
@@ -106,25 +85,25 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 nav {
-  display:flex;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 10px 35px;
   flex-wrap: wrap;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   nav {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     position: relative;
   }
-  
+
   nav h2 {
     margin-bottom: 0;
   }
-  
+
   .nav {
     position: absolute;
     top: 100%;
@@ -140,23 +119,28 @@ nav {
 }
 .active {
   color: #f9f9f9;
-  text-decoration-line:  overline;
-  
+  text-decoration-line: overline;
 }
 
 .content {
   justify-content: center;
   padding: 1.5em;
-  margin-bottom: 3em;
   background: #1a1a1a;
   border-radius: 25px;
   box-shadow: 0em 0em 2em #f9f9f9;
+  margin-bottom: 1em;
+}
+
+@media (max-width: 767px) {
+  .content {
+    padding: 1em;
+    border-radius: 15px;
+  }
 }
 
 @media (min-width: 768px) {
   .content {
     padding: 2em;
-    margin-bottom: 5em;
   }
 }
 .content > a {
@@ -169,25 +153,25 @@ nav {
   transform: scale(1.05);
   transition: transform 0.2s ease-in-out;
 }
-.nav {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+@media (min-width: 768px) {
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
 }
 
 .nav-item {
-  display:flex;
-  justify-content: space-between;
   margin: 8px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .nav {
     justify-content: center;
     gap: 1rem;
   }
-  
+
   .nav-item {
     margin: 4px;
   }
