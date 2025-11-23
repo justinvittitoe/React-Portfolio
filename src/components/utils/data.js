@@ -1,5 +1,5 @@
 import MayberryPricing from "../../assets/MayberryPricing.png"
-import digestHome from "../../assets/digestHome.png"
+import digestHome from "../../assets/DigestHome.png"
 import BookSearch from "../../assets/BookSearch.png"
 import KanbanBoard from "../../assets/KanbanBoard.png"
 import DoodleNoodle from "../../assets/DoodleNoodle.png"
