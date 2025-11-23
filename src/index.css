@@ -5,8 +5,12 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
+  color-scheme: dark;
   color: rgba(255, 255, 255, 0.87);
+  background-color: #020202;
+}
+
+html {
   background-color: #020202;
 }
 
@@ -34,10 +38,12 @@ body {
   min-width: 320px;
   min-height: 100vh;
   width: 100%;
+  background-color: #020202;
 }
 
 #root {
   width: 100%;
+  background-color: #020202;
 }
 
 h1 {
@@ -125,7 +131,7 @@ nav {
 .content {
   justify-content: center;
   padding: 1.5em;
-  background: #1a1a1a;
+  background: #1a1a1a !important;
   border-radius: 25px;
   box-shadow: 0em 0em 2em #f9f9f9;
   margin-bottom: 1em;
@@ -135,6 +141,8 @@ nav {
   .content {
     padding: 1em;
     border-radius: 15px;
+    background: #1a1a1a !important;
+    box-shadow: 0em 0em 1.5em #f9f9f9;
   }
 }
 
@@ -175,19 +183,22 @@ nav {
   .nav-item {
     margin: 4px;
   }
+
+  /* Force single column layout on mobile for all grid containers */
+  .grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+
+  /* Ensure all col-span classes become full width on mobile */
+  [class*="col-span"] {
+    grid-column: span 1 / span 1 !important;
+  }
+
+  /* Ensure row-span only applies on desktop */
+  [class*="row-span"] {
+    grid-row: auto !important;
+  }
 }
 
 
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
