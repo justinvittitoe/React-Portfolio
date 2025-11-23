@@ -1,4 +1,4 @@
-const resume = '/JustinVittitoeResume.pdf'
+import resume from '../../assets/JustinVittitoeResume SWE.pdf';
 
 export default function Resume() {
 
@@ -27,6 +27,16 @@ export default function Resume() {
 
         },
         {
+            language: "MongoDB",
+            icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original-wordmark.svg" className='size-20' />
+
+        },
+        {
+            language: "Python",
+            icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original-wordmark.svg" className='size-20'/>
+
+        },
+        {
             language: "React",
             icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" className='size-20' />
           
@@ -36,10 +46,22 @@ export default function Resume() {
             icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original-wordmark.svg" className='size-20' />
         },
         {
+            language: "express",
+            icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original-wordmark.svg" className='size-20'/>
+        },
+        {
+            language: "ApolloGraphQl",
+            icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apollographql/apollographql-original-wordmark.svg" className='size-20'/>
+        },
+        {
             language: "vite",
             icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg" className='size-20' />
 
         },
+        {
+            language: "Cypress",
+            icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cypressio/cypressio-original.svg" className='size-20'/>
+        }
        
         
     ]
@@ -51,32 +73,24 @@ export default function Resume() {
     ))
 
     return (
-        <div>
-            <div className='content'>
-                <h2 className='text-center mb-6'>Skills</h2>
-                <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
-                    {mapSkills}
-                </div>
-            </div>
+        <div className="grid grid-cols-2 gap-6 my-10">
 
             <div className='content'>
-                <h1 className='text-center mb-6'>Resume</h1>
-                <div className='mb-4 text-center'>
-                    <a 
-                        href={resume} 
-                        download="JustinVittitoe_Resume.pdf"
-                        className='bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors'
-                    >
-                        Download Resume
-                    </a>
-                </div>
+                <h2 className='text-center mb-6'>Resume</h2>
                 <iframe
                     src={resume}
+                    id='resume'
                     title="Resume"
                     width="100%"
                     height="600px"
                     className='border rounded-lg'
                 />
+            </div>
+            <div className='content'>
+                <h2 className='text-center mb-6'>Skills</h2>
+                <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
+                    {mapSkills}
+                </div>
             </div>
         </div>
     );

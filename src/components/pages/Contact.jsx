@@ -11,25 +11,6 @@ function Contact() {
    const [result, setResult] = useState('');
    
 
-    useEffect(()=> {
-        const newErrors = {
-            name: touched.name && name.trim() === '' ? 'Name is required' : '',
-            email: touched.email && email.trim() === ''? 'Email is required' : '',
-            message: touched.message && message.trim() === '' ? 'Message is required' : ''
-        }
-        setErrorMessage(newErrors)
-        // set a timer to clear the error messages after 3 seconds
-        const timer = setTimeout(()=> {
-            setErrorMessage({
-                name: '',
-                email: '',
-                message: ''
-            });
-        }, 3000)
-        // Cleanup the timer when the component unmounts or dependencies change
-        return () => clearTimeout(timer);
-    }, [name,email,message, touched]);
-
     
 
     const handleBlur = (e) => {
@@ -101,17 +82,17 @@ function Contact() {
     
 
     return (
-        <div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
             <div className='content'>
                 <h2 className='text-center mb-6'>Contact Information</h2>
-                <div className='max-w-md mx-auto'>
+                <div>
                     <ul className='space-y-4'>
-                        <li className="flex items-center"> 
+                        <li className="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mr-3 flex-shrink-0">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                             </svg>
-                            Colorado Springs
+                            San Diego
                         </li>
                         <li className="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mr-3 flex-shrink-0">
@@ -128,9 +109,9 @@ function Contact() {
                     </ul>
                 </div>
             </div>
-                        
-            <div className='content'>
-                <form className='max-w-lg mx-auto space-y-4' onSubmit={onSubmit}>
+
+            <div className='content md:col-span-1'>
+                <form className='space-y-4' onSubmit={onSubmit}>
                     <h2 className='text-center'>Contact Form</h2>
                     <div className="input-box">
                         <label>Full Name</label>
@@ -145,7 +126,7 @@ function Contact() {
                             type='text'
                             required
                         />
-                        
+
                     </div>
                     <div>
                         <label>Email</label>
@@ -160,7 +141,7 @@ function Contact() {
                             type='email'
                             required
                         />
-                        
+
                     </div>
                     <div>
                         <label className='pb2'>Message</label>
@@ -174,7 +155,7 @@ function Contact() {
                             placeholder='Message'
                             required
                         />
-                        
+
                     </div>
                     <button type="submit" className='w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg transition-colors'>
                         Submit
@@ -182,7 +163,7 @@ function Contact() {
                     <span>{result}</span>
                 </form>
             </div>
-        </div>        
+        </div>
     );
 }
 

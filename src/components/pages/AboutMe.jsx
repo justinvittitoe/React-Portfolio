@@ -1,23 +1,72 @@
 import ProfileImage from '../../assets/Profile.jpeg';
-
+import Surfing from '../../assets/Surfing.jpeg';
+import Hiking from '../../assets/Hiking.jpeg';
+import {projectsArray} from '../utils/data.js';
+import githubicon from "../../assets/github-mark-white.png";
+import resumeImage from "../../assets/ResumeImage.png";
+import resume from '../../assets/JustinVittitoeResume SWE.pdf';
 
 function AboutMe({handlePageChange}) {
-   
+    const limitedProjects = projectsArray.slice(0,3)
+
+    const handleResumeClick = () => {
+        handlePageChange('Resume');
+    }
+
+    const handleDownload = () => {
+        const link = document.createElement('a');
+        link.href = resume;
+        link.download = 'JustinVittitoe_Resume.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    const handleProjects = () => {
+        handlePageChange('Projects');
+    }
+
+    const mapProjects = limitedProjects.map((project, index) => (
+        
+        <div key={index} className="md:grid grid-cols-2 project justify-center">
+            <div className="col-span-2 w-full gap-4 mb-2">
+                <div className="md:w-full flex">
+                    <p2 className=" text-lg font-bold mb-2">{project.title}</p2>
+                </div>
+                <div className="md:w-full flex-shrink-0">
+                    <img src={project.imageId} alt={project.imageD} className="rounded-xl w-full md:h-full object-cover mb-2" />
+                </div>
+                <div className="col-span-2 w-full mb-4">
+                    <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:scale-105 transition-transform mb-2">
+                        <img src={githubicon} alt="GitHub" className="h-6 w-6" />
+                        <span className="text-sm">Code</span>
+                    </a>
+                    <a href={project.projectLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:scale-105 transition-transform mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+                        </svg>
+                        <span className="text-sm">Live Demo</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    ))
 
     return (
-        <div>
-            <div className='content'>
-                <div className="flex flex-col md:flex-row md:justify-between gap-6">
-                    <img src={ProfileImage} alt='Profile photo' className="rounded-xl w-full md:w-40 h-auto md:h-60 object-cover" />
-                    <div className='flex-1'>
+        <div className='grid grid-cols-1 md:grid-cols-3 auto-rows gap-4 my-10'>
+            {/* Location Schooing and Email */}
+            <div>
+                <div className='content grid grid-cols-1 w-full h-full'>
+                    <div className='w-full'>
                         <h2>Personal Info</h2>
-                        <ul className=''>
+                        <ul>
                             <li className="mt-5 mb-5 flex items-center"> 
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mr-2 flex-shrink-0">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                                 </svg>
-                                Colorado Springs
+                                San Diego
                             </li>
                             <li className="mt-5 mb-5 flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mr-2 flex-shrink-0">
@@ -33,17 +82,50 @@ function AboutMe({handlePageChange}) {
                             </li>
                         </ul>
                     </div>
-                </div>    
-                <div className="mt-8">
+                    <div className='flex items-center justify-center w-full cursor-pointer'>
+                        <img src={resumeImage} alt='resume image' className="rounded-xl w-full h-auto object-cover" onClick={handleResumeClick}/>
+                    </div>
+                    <button onClick={handleDownload} type="button" className='w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg transition-colors'>
+                        Download Resume
+                    </button>
+                </div>
+            </div>
+            {/* Profile Picture */}
+            <div className='content grid grid-cols-1 md:grid-cols-2 w-full h-full gap-4'>
+                <h2 className='col-span-2'>Caught on Cam</h2>
+                <div className="col-span-1 md:col-span-2">
+                    <img src={Surfing} alt='Profile photo' className="rounded-xl w-full h-auto md:h-60 object-cover" />
+
+                </div>
+                <div>
+                    <img src={ProfileImage} alt='Profile photo' className="rounded-xl w-full h-auto md:h-60 object-cover" />
+
+                </div>
+                <div>
+                    <img src={Hiking} alt='Profile photo' className="rounded-xl w-full h-auto md:h-60 object-cover" />
+                </div>
+            </div>
+            
+            {/* Projects */}
+            <div className='content md:row-span-2 h-full w-full'>
+                <h2>Projects</h2>
+                {mapProjects}
+                <button onClick={handleProjects} type="button" className='w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg transition-colors'>
+                    See all Projects
+                </button>
+            </div>
+            {/* About me section */}
+            <div className='content flex col-span-1 md:col-span-2 h-full w-full'>
+                <div className="w-full">
                     <h1>About Me</h1>
                     <p className="text-base leading-relaxed">
                         Welcome to my website! My name is Justin Vittitoe, and I am a recent Financial Management graduate of Cal
-                        Poly, San Luis Obispo. I am currently working as an operations specialist for a new community in Colorado Springs building entry to mid-tier
-                        homes. My role working as an operations specialist has sparked an interest in computer science and automation. When I am not coding you can find me traveling to find new waves around the world. 
+                        Poly, San Luis Obispo. I am currently working as an Operations Specialist for a new community in Colorado Springs building entry to mid-tier
+                        homes. My role working as an operations specialist has sparked an interest in computer science and automation. When I am not coding you can find me traveling to find new waves around the world.
                     </p>
                     <p className="text-base leading-relaxed mt-4">
-                        If you want to learn more about my journey to becoming a full stack engineer check out my <a href='#resume' onClick={()=>handlePageChange('Resume')}>Resume</a>, 
-                        <a href="https://github.com/justinvittitoe"> Github</a>, or my <a href="https://www.linkedin.com/in/justin-vittitoe-99a8861ba/" > LinkedIn</a> to learn a little more of my professional career. 
+                        If you want to learn more about my journey to becoming a full stack engineer check out my <a href='#resume' onClick={() => handlePageChange('Resume')}>Resume</a>,
+                        <a href="https://github.com/justinvittitoe"> Github</a>, or my <a href="https://www.linkedin.com/in/justin-vittitoe-99a8861ba/" > LinkedIn</a> to learn a little more about my professional career.
                     </p>
                 </div>
             </div>
